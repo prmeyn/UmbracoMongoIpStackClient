@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32328.378
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UmbracoMongoIpStackClient", "UmbracoMongoIpStackClient.csproj", "{3908F8BF-28AA-41E0-B9A0-78FC840291A0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Files", "Solution Files", "{F05FB0EF-7A35-43F5-9074-88EC6FFFB965}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\release.yml = .github\workflows\release.yml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3908F8BF-28AA-41E0-B9A0-78FC840291A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3908F8BF-28AA-41E0-B9A0-78FC840291A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3908F8BF-28AA-41E0-B9A0-78FC840291A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3908F8BF-28AA-41E0-B9A0-78FC840291A0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {46465406-CE59-4A39-8EA3-D521BF7D37C3}
+	EndGlobalSection
+EndGlobal
