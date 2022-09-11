@@ -15,8 +15,8 @@ namespace UmbracoMongoIpStackClient.DTOs
 		public string? region_name { get; set; }
 		public string? city { get; set; }
 		public string? zip { get; set; }
-		public float? latitude { get; set; }
-		public float? longitude { get; set; }
+		public double? latitude { get; set; }
+		public double? longitude { get; set; }
 		public Location? location { get; set; }
 		public DateTimeOffset? ResponseTimeStamp { get; set; }
 	}

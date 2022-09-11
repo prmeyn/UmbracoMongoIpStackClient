@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson;
+﻿using GeoCoordinatePortable;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using Newtonsoft.Json;
@@ -49,7 +50,7 @@ namespace UmbracoMongoIpStackClient
 			response.EnsureSuccessStatusCode();
 			string responseBody = await response.Content.ReadAsStringAsync();
 			var responseValue = JsonConvert.DeserializeObject<IpStackRootObject>(responseBody);
-			responseValue.ResponseTimeStamp = DateTime.UtcNow;
+			responseValue = EnsureValidData(responseValue);
 			if (string.IsNullOrWhiteSpace(responseValue?.ip))
 			{
 				if (value != null)
@@ -74,6 +75,30 @@ namespace UmbracoMongoIpStackClient
 					filter: Builders<BsonDocument>.Filter.Eq("_id", ip),
 					responseValue.ToBsonDocument());
 			}
+			return responseValue;
+		}
+
+		private static IpStackRootObject EnsureValidData(IpStackRootObject? responseValue)
+		{
+			double randomLatitude = 55.01307;
+			double randomLongitude = 11.92174;
+			var someCoordinates = new GeoCoordinate(randomLatitude, randomLongitude);
+			if (responseValue == null)
+			{
+				responseValue = new IpStackRootObject()
+				{
+					latitude = someCoordinates.Latitude,
+					longitude = someCoordinates.Longitude,
+					country_code = "DK"
+				};
+			}
+			else
+			{
+				try { someCoordinates = new GeoCoordinate(responseValue.latitude ?? randomLatitude, responseValue.longitude ?? randomLongitude); } catch { }
+				responseValue.latitude = someCoordinates.Latitude;
+				responseValue.longitude = someCoordinates.Longitude;
+			}
+			responseValue.ResponseTimeStamp = DateTime.UtcNow;
 			return responseValue;
 		}
 
