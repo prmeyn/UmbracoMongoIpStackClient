@@ -1,9 +1,11 @@
-﻿namespace UmbracoMongoIpStackClient.DTOs
+﻿using Newtonsoft.Json;
+
+namespace UmbracoMongoIpStackClient.DTOs
 {
 	public class Language
 	{
-		public string? code { get; set; }
-		public string? name { get; set; }
-		public string? native { get; set; }
+		[JsonProperty("code")] public string? Code { get; set; }
+		[JsonProperty("name")] public string? Name { get; set; }
+		[JsonProperty("native")] public string? Native { get; set; }
 	}
 }

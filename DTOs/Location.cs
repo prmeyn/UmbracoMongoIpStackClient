@@ -1,14 +1,16 @@
-﻿namespace UmbracoMongoIpStackClient.DTOs
+﻿using Newtonsoft.Json;
+
+namespace UmbracoMongoIpStackClient.DTOs
 {
 	public class Location
 	{
-		public int? geoname_id { get; set; }
-		public string? capital { get; set; }
-		public Language[]? languages { get; set; }
-		public string? country_flag { get; set; }
-		public string? country_flag_emoji { get; set; }
-		public string? country_flag_emoji_unicode { get; set; }
-		public string? calling_code { get; set; }
-		public bool? is_eu { get; set; }
+		[JsonProperty("geoname_id")] public int? GeonameId { get; set; }
+		[JsonProperty("capital")] public string? Capital { get; set; }
+		[JsonProperty("languages")] public Language[]? Languages { get; set; }
+		[JsonProperty("country_flag")] public string? CountryFlag { get; set; }
+		[JsonProperty("country_flag_emoji")] public string? CountryFlagEmoji { get; set; }
+		[JsonProperty("country_flag_emoji_unicode")] public string? CountryFlagEmojiUnicode { get; set; }
+		[JsonProperty("calling_code")] public string? CallingCode { get; set; }
+		[JsonProperty("is_eu")] public bool? IsEU { get; set; }
 	}
 }

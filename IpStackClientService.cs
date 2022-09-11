@@ -51,7 +51,7 @@ namespace UmbracoMongoIpStackClient
 			string responseBody = await response.Content.ReadAsStringAsync();
 			var responseValue = JsonConvert.DeserializeObject<IpStackRootObject>(responseBody);
 			responseValue = EnsureValidData(responseValue);
-			if (string.IsNullOrWhiteSpace(responseValue?.ip))
+			if (string.IsNullOrWhiteSpace(responseValue?.Ip))
 			{
 				if (value != null)
 				{
@@ -59,7 +59,7 @@ namespace UmbracoMongoIpStackClient
 				}
 				else
 				{
-					responseValue.ip = ip;
+					responseValue.Ip = ip;
 					return responseValue;
 				}
 			}
@@ -87,16 +87,28 @@ namespace UmbracoMongoIpStackClient
 			{
 				responseValue = new IpStackRootObject()
 				{
-					latitude = someCoordinates.Latitude,
-					longitude = someCoordinates.Longitude,
-					country_code = "DK"
+					Latitude = someCoordinates.Latitude,
+					Longitude = someCoordinates.Longitude,
+					CountryCode = "DK"
 				};
 			}
 			else
 			{
-				try { someCoordinates = new GeoCoordinate(responseValue.latitude ?? randomLatitude, responseValue.longitude ?? randomLongitude); } catch { }
-				responseValue.latitude = someCoordinates.Latitude;
-				responseValue.longitude = someCoordinates.Longitude;
+				if((responseValue.Latitude == null || responseValue.Longitude == null) && !string.IsNullOrWhiteSpace(responseValue.CountryCode))
+				{
+					var database = MongoDBClientConnection.GetDatabase(_ipStackDataDatabaseName);
+					var collection = database.GetCollection<BsonDocument>(_ipStackDataCollectionName);
+					var someCoordinatesFromTheSameCountry = collection.Find(
+						filter: Builders<BsonDocument>.Filter.Eq("CountryCode", responseValue.CountryCode)).ToListAsync().Result.Select(v => BsonSerializer.Deserialize<IpStackRootObject>(v)).FirstOrDefault(isro => isro.Latitude != null && isro.Longitude != null);
+					if (someCoordinatesFromTheSameCountry != null)
+					{
+						responseValue.Latitude = someCoordinatesFromTheSameCountry.Latitude;
+						responseValue.Longitude = someCoordinatesFromTheSameCountry.Longitude;
+					}
+				}
+				try { someCoordinates = new GeoCoordinate(responseValue.Latitude ?? randomLatitude, responseValue.Longitude ?? randomLongitude); } catch { }
+				responseValue.Latitude = someCoordinates.Latitude;
+				responseValue.Longitude = someCoordinates.Longitude;
 			}
 			responseValue.ResponseTimeStamp = DateTime.UtcNow;
 			return responseValue;
