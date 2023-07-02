@@ -2,7 +2,7 @@
 
 namespace UmbracoMongoIpStackClient.DTOs
 {
-	public class Location
+	public sealed class Location
 	{
 		[JsonProperty("geoname_id")] public int? GeonameId { get; set; }
 		[JsonProperty("capital")] public string? Capital { get; set; }

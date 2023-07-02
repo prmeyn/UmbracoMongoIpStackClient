@@ -2,7 +2,7 @@
 
 namespace UmbracoMongoIpStackClient.DTOs
 {
-	public class Language
+	public sealed class Language
 	{
 		[JsonProperty("code")] public string? Code { get; set; }
 		[JsonProperty("name")] public string? Name { get; set; }

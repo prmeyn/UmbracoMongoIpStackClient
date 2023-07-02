@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace UmbracoMongoIpStackClient.DTOs
 {
-	public class IpStackRootObject
+	public sealed class IpStackRootObject
 	{
 		[BsonId]
 		[JsonProperty("ip")] public string? Ip { get; set; }

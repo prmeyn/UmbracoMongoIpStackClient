@@ -5,7 +5,7 @@ using UmbracoMongoDbClient.Setup;
 namespace UmbracoMongoIpStackClient.Setup
 {
 	[ComposeAfter(typeof(MongoDbComposer))]
-	public class IpStackComposer : IComposer
+	public sealed class IpStackComposer : IComposer
 	{
 		public void Compose(IUmbracoBuilder builder)
 		{

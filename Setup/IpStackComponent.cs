@@ -3,7 +3,7 @@ using Umbraco.Cms.Core.Composing;
 
 namespace UmbracoMongoIpStackClient.Setup
 {
-	public class IpStackComponent : IComponent
+	public sealed class IpStackComponent : IComponent
 	{
 		private readonly IConfiguration _config;
 
